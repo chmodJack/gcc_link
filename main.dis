@@ -1,0 +1,115 @@
+
+a.out:     file format elf32-littlearm
+
+
+Disassembly of section .ro:
+
+00000200 <jj>:
+ 200:	00000233 	andeq	r0, r0, r3, lsr r2
+ 204:	00000066 	andeq	r0, r0, r6, rrx
+ 208:	00000888 	andeq	r0, r0, r8, lsl #17
+
+0000020c <add_data>:
+ 20c:	00000001 	andeq	r0, r0, r1
+
+00000210 <sub>:
+ 210:	e52db004 	push	{fp}		; (str fp, [sp, #-4]!)
+ 214:	e28db000 	add	fp, sp, #0
+ 218:	e24dd00c 	sub	sp, sp, #12
+ 21c:	e50b0008 	str	r0, [fp, #-8]
+ 220:	e50b100c 	str	r1, [fp, #-12]
+ 224:	e51b2008 	ldr	r2, [fp, #-8]
+ 228:	e51b300c 	ldr	r3, [fp, #-12]
+ 22c:	e0633002 	rsb	r3, r3, r2
+ 230:	e1a00003 	mov	r0, r3
+ 234:	e24bd000 	sub	sp, fp, #0
+ 238:	e49db004 	pop	{fp}		; (ldr fp, [sp], #4)
+ 23c:	e12fff1e 	bx	lr
+
+00000240 <sub_data>:
+ 240:	00000002 	andeq	r0, r0, r2
+
+00000244 <add>:
+ 244:	e52db004 	push	{fp}		; (str fp, [sp, #-4]!)
+ 248:	e28db000 	add	fp, sp, #0
+ 24c:	e24dd00c 	sub	sp, sp, #12
+ 250:	e50b0008 	str	r0, [fp, #-8]
+ 254:	e50b100c 	str	r1, [fp, #-12]
+ 258:	e51b2008 	ldr	r2, [fp, #-8]
+ 25c:	e51b300c 	ldr	r3, [fp, #-12]
+ 260:	e0823003 	add	r3, r2, r3
+ 264:	e1a00003 	mov	r0, r3
+ 268:	e24bd000 	sub	sp, fp, #0
+ 26c:	e49db004 	pop	{fp}		; (ldr fp, [sp], #4)
+ 270:	e12fff1e 	bx	lr
+
+00000274 <main>:
+ 274:	e92d4800 	push	{fp, lr}
+ 278:	e28db004 	add	fp, sp, #4
+ 27c:	e24dd018 	sub	sp, sp, #24
+ 280:	e50b0018 	str	r0, [fp, #-24]	; 0xffffffe8
+ 284:	e50b101c 	str	r1, [fp, #-28]	; 0xffffffe4
+ 288:	e3a00002 	mov	r0, #2
+ 28c:	e3a01003 	mov	r1, #3
+ 290:	ebffffeb 	bl	244 <add>
+ 294:	e50b0008 	str	r0, [fp, #-8]
+ 298:	e3a00002 	mov	r0, #2
+ 29c:	e3a01003 	mov	r1, #3
+ 2a0:	ebffffda 	bl	210 <sub>
+ 2a4:	e50b000c 	str	r0, [fp, #-12]
+ 2a8:	e59f3030 	ldr	r3, [pc, #48]	; 2e0 <main+0x6c>
+ 2ac:	e5932000 	ldr	r2, [r3]
+ 2b0:	e59f302c 	ldr	r3, [pc, #44]	; 2e4 <main+0x70>
+ 2b4:	e5933000 	ldr	r3, [r3]
+ 2b8:	e0822003 	add	r2, r2, r3
+ 2bc:	e59f3024 	ldr	r3, [pc, #36]	; 2e8 <main+0x74>
+ 2c0:	e5933000 	ldr	r3, [r3]
+ 2c4:	e0823003 	add	r3, r2, r3
+ 2c8:	e50b3010 	str	r3, [fp, #-16]
+ 2cc:	e3a03000 	mov	r3, #0
+ 2d0:	e1a00003 	mov	r0, r3
+ 2d4:	e24bd004 	sub	sp, fp, #4
+ 2d8:	e8bd4800 	pop	{fp, lr}
+ 2dc:	e12fff1e 	bx	lr
+ 2e0:	0000020c 	andeq	r0, r0, ip, lsl #4
+ 2e4:	00000240 	andeq	r0, r0, r0, asr #4
+ 2e8:	000002ec 	andeq	r0, r0, ip, ror #5
+
+Disassembly of section .rw:
+
+000002ec <main_data>:
+ 2ec:	00000003 	andeq	r0, r0, r3
+
+Disassembly of section .comment:
+
+00000000 <.comment>:
+   0:	3a434347 	bcc	10d0d24 <main_data+0x10d0a38>
+   4:	35312820 	ldrcc	r2, [r1, #-2080]!	; 0xfffff7e0
+   8:	392e343a 	stmdbcc	lr!, {r1, r3, r4, r5, sl, ip, sp}
+   c:	732b332e 			; <UNDEFINED> instruction: 0x732b332e
+  10:	33326e76 	teqcc	r2, #1888	; 0x760
+  14:	37373131 			; <UNDEFINED> instruction: 0x37373131
+  18:	2029312d 	eorcs	r3, r9, sp, lsr #2
+  1c:	2e392e34 	mrccs	14, 1, r2, cr9, cr4, {1}
+  20:	30322033 	eorscc	r2, r2, r3, lsr r0
+  24:	35303531 	ldrcc	r3, [r0, #-1329]!	; 0xfffffacf
+  28:	28203932 	stmdacs	r0!, {r1, r4, r5, r8, fp, ip, sp}
+  2c:	72657270 	rsbvc	r7, r5, #112, 4
+  30:	61656c65 	cmnvs	r5, r5, ror #24
+  34:	00296573 	eoreq	r6, r9, r3, ror r5
+
+Disassembly of section .ARM.attributes:
+
+00000000 <.ARM.attributes>:
+   0:	00002f41 	andeq	r2, r0, r1, asr #30
+   4:	61656100 	cmnvs	r5, r0, lsl #2
+   8:	01006962 	tsteq	r0, r2, ror #18
+   c:	00000025 	andeq	r0, r0, r5, lsr #32
+  10:	4d524105 	ldfmie	f4, [r2, #-20]	; 0xffffffec
+  14:	4d445437 	cfstrdmi	mvd5, [r4, #-220]	; 0xffffff24
+  18:	02060049 	andeq	r0, r6, #73	; 0x49
+  1c:	01090108 	tsteq	r9, r8, lsl #2
+  20:	01140412 	tsteq	r4, r2, lsl r4
+  24:	03170115 	tsteq	r7, #1073741829	; 0x40000005
+  28:	01190118 	tsteq	r9, r8, lsl r1
+  2c:	061e011a 			; <UNDEFINED> instruction: 0x061e011a
